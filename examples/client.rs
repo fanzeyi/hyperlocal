@@ -5,7 +5,14 @@ use tokio::io::{self, AsyncWriteExt as _};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
-    let url = Uri::new("/tmp/hyperlocal.sock", "/").into();
+    let url = Uri::new(
+        std::env::temp_dir()
+            .join("hyperlocal.sock")
+            .display()
+            .to_string(),
+        "/",
+    )
+    .into();
 
     let client = Client::unix();
 

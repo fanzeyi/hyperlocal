@@ -13,7 +13,7 @@ pub(crate) mod conn {
         pin::Pin,
         task::{Context, Poll},
     };
-    use tokio::net::{UnixListener, UnixStream};
+    use tokio_uds_compat::{UnixListener, UnixStream};
 
     pin_project! {
         /// A stream of connections from binding to a socket.

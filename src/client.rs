@@ -18,13 +18,13 @@ pin_project! {
     #[derive(Debug)]
     pub struct UnixStream {
         #[pin]
-        unix_stream: tokio::net::UnixStream,
+        unix_stream: tokio_uds_compat::UnixStream,
     }
 }
 
 impl UnixStream {
     async fn connect(path: impl AsRef<Path>) -> io::Result<Self> {
-        let unix_stream = tokio::net::UnixStream::connect(path).await?;
+        let unix_stream = tokio_uds_compat::UnixStream::connect(dbg!(path.as_ref())).await?;
         Ok(Self { unix_stream })
     }
 }
